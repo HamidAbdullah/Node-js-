@@ -8,8 +8,8 @@
   },
   "author": "Hamid Abdullah",
   "license": "ISC",
-  
   "dependencies": {
-    "nodemon": "^3.1.7"
+    "nodemon": "^3.1.7",
+    "validator": "^13.12.0"
   }
 }
