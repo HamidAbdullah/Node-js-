@@ -1,5 +1,8 @@
 {
     "recommendations": [
-        "chris-noring.node-snippets"
+        "chris-noring.node-snippets",
+        "nerudevs.jellyfish-dark",
+        "leizongmin.node-module-intellisense",
+        "roerohan.mongo-snippets-for-node-js"
     ]
 }

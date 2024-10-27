@@ -1,2 +1,1 @@
-My name is Hamid Abdullah
-I am learning Node.js.
+My name is Hamid Abdullah  I'm from Pakistan pk 
