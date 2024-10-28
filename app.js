@@ -20,7 +20,7 @@ const isEmail = validator.isEmail('Hamidabdullahofficial@gmail.com');
 // File System Methods
 
 // Write File
-fs.writeFileSync("note.txt", `My name is Hamid Abdullah `);
+fs.writeFileSync("note.txt", chalk.green(`My name is Hamid Abdullah `));
 // Append Text in this file.
 fs.appendFileSync("note.txt", " I'm from Pakistan pk ");
 
