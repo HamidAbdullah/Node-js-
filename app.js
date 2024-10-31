@@ -5,6 +5,7 @@ import addTwoNumber from "./src/service.js";
 import getNotes from "./src/notes.js";
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';  // This is important for using yargs in ES modules
+import { argv } from "process";
 
 const notesText = getNotes({ notes: "Hamid ABDULLAH" });
 const sum = addTwoNumber(10, -5);
@@ -23,10 +24,24 @@ log(chalk.blue("Hello") + " World" + chalk.red("!"));
 yargs(hideBin(process.argv)).command({
   command: 'add',
   describe: 'Add a new note',
-  handler: function () {
-    console.log('Adding a new note...');
+  builder: {
+      title: {
+          describe: 'Note title',
+          demandOption: true,
+          type: 'string'
+      },
+      body: {
+          describe: 'Note body',
+          demandOption: true,
+          type: 'string'
+      }
+  },
+  handler: function (argv) {
+      console.log('Title: ' + argv.title)
+      console.log('Body: ' + argv.body)
   }
-}).argv;
+}).argv
+
 
 yargs(hideBin(process.argv)).command({
   command: 'remove',
