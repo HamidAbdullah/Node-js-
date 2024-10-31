@@ -1,68 +1,42 @@
 import validator from "validator";
 import chalk from "chalk";
 import fs from "fs";
-import addTwoNumber from "./src/service.js";
-import getNotes from "./src/notes.js";
 import yargs from 'yargs';
-import { hideBin } from 'yargs/helpers';  // This is important for using yargs in ES modules
-import { argv } from "process";
-
-const notesText = getNotes({ notes: "Hamid ABDULLAH" });
-const sum = addTwoNumber(10, -5);
-const isEmail = validator.isEmail("Hamidabdullahofficial@gmail.com");
-const log = console.log;
-
-fs.writeFileSync("note.txt", chalk.green(`My name is Hamid Abdullah `));
-fs.appendFileSync("note.txt", " I'm from Pakistan Abbottabad pk ");
-
-log(chalk.red("Email validation result:"), chalk.red(isEmail));
-log(chalk.green("Sum of numbers:"), chalk.yellow.bold(sum));
-log(chalk.green("Notes Text:"), chalk.magenta(notesText));
-log(chalk.blue("Hello") + " World" + chalk.red("!"));
+import { hideBin } from 'yargs/helpers';  
+import { addNote, removeNotes } from './src/notes.js';
 
 // Properly use yargs with hideBin to parse arguments
 yargs(hideBin(process.argv)).command({
   command: 'add',
   describe: 'Add a new note',
   builder: {
-      title: {
-          describe: 'Note title',
-          demandOption: true,
-          type: 'string'
-      },
-      body: {
-          describe: 'Note body',
-          demandOption: true,
-          type: 'string'
-      }
+    title: {
+      describe: 'Note title',
+      demandOption: true,
+      type: 'string'
+    },
+    body: {
+      describe: 'Note body',
+      demandOption: true,
+      type: 'string'
+    }
   },
   handler: function (argv) {
-      console.log('Title: ' + argv.title)
-      console.log('Body: ' + argv.body)
-  }
+    addNote(argv.title, argv.body)
+}
 }).argv
-
 
 yargs(hideBin(process.argv)).command({
   command: 'remove',
-  describe: 'Removing Node.js',
-  handler: function () {
-    console.log(chalk.red('Remove Node.js'))
-  }
-}).argv
-
-yargs(hideBin(process.argv)).command({
-  command: 'list',
-  describe: 'list all Node.js',
-  handler: function () {
-    console.log(chalk.underline('list all Node.js'))
-  }
-}).argv
-
-yargs(hideBin(process.argv)).command({
-  command: 'read',
-  describe: 'read Node.js',
-  handler: function () {
-    console.log(chalk.red('read Node.js'))
-  }
-}).argv
+  describe: 'Remove a note',
+  builder: {
+    title: {
+      describe: 'Title of the note to remove',
+      demandOption: true,
+      type: 'string',
+    },
+  },
+  handler: function (argv) {
+    removeNotes(argv.title);
+  },
+}).argv;
